@@ -1,17 +1,30 @@
-<!-- Basic HTML Index using main.js and styles.css -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Weather Widget</title>
-    <link
-      rel="stylesheet"
-      href="styles.css"
-    />
-  </head>
-  <body>
-    <h1>Weather Widget</h1>
-    <p>Good luck!</p>
-    <script src="main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+  
+  
+  <title>Weather App | Smarter Technologies</title>
+</head>
+<body>
+  <div class="container">
+    <h2>Weather App</h2>
+    <input type="text" id="city" placeholder="Enter location e.g. Cardiff, UK">
+    <button>Search</button>
+
+    <img id="weather-icon" alt="weather icon">
+
+    <div id="temperature">
+      <p></p>
+    </div>
+
+    <div id="weather-description"></div>
+
+    <div id="weather-forecast"></div>
+
+  </div>
+</body>
 </html>

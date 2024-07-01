@@ -1,9 +1,9 @@
 :root {
   --font-family: Helvetica, Arial, sans-serif;
-  --standard-padding: 1rem;
+  --standard-padding: 1rem;  
 }
 
-h1 {
+h2 {
   padding: 0 var(--standard-padding);
   font-family: var(--font-family);
   font-size: 2rem;
@@ -16,3 +16,37 @@ p {
   font-size: 1.2rem;
   color: rgb(3, 3, 224);
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #fafafafa;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+h1, label, p {
+  margin: 10px 0;
+  padding: 30px;
+  color: green;
+}
+
+input {
+  padding: 10px;
+  margin: 10px 0;
+  width: calc(80% - 20px);
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
