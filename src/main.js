@@ -7,10 +7,10 @@ function getWeather() {
         return;
     }
 
-    const currentWeatherUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city
-    }&aqi=no`;
-    const forecastWeatherUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city
-    }&days=3&aqi=no&alerts=no`;
+    const currentWeatherUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city
+}&aqi=no`;
+    const forecastWeatherUrl = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city
+}&aqi=no&alerts=no`;
 
     fetch(currentWeatherUrl)
         .then((response) => response.json())
@@ -45,9 +45,9 @@ function displayWeather(data) {
     tempDivInfo.innerHTML = '';
     displayHourlyForecast.innerHTML = '';
 
-    weatherIcon.src = data.current.condition.icon;
-    temperature.innerHTML = `${data.current.temp_c}°C`;
-    weatherDescription.innerHTML = data.current.condition.text;
+    // weatherIcon.src = data.current.condition.icon;
+    // temperature.innerHTML = `${data.current.temp - 273.5}°C`;
+    // weatherDescription.innerHTML = data.current.condition.text;
 
     if (data.cod === '404') {
         weatherDescription.innerHTML = `<p>${data.message}</p>`;
