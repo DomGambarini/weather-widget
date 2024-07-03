@@ -3,21 +3,34 @@ function getWeather() {
     const city = document.getElementById('city').value;
 
     if (city === '') {
-        alert('Please enter a city');
+        alert('Please enter a location');
         return;
     }
 
     const currentWeatherUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city
 }&aqi=no`;
+const dailyWeatherUrl = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city
+}&aqi=yes&alerts=yes`;
+    
 
     fetch(currentWeatherUrl)
-        .then((response) => response.json())
-        .then((data) => {
+        .then(response => response.json())
+        .then(data => {
             displayWeather(data);
         })
         .catch(error => {
-            console.log('Error fetching current weather data:', error);
+            console.error('Error fetching current weather data:', error);
             alert('Error fetching current weather data. Please try again.');
+    });
+
+    fetch(dailyWeatherUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            displayDailyWeather(data.list);
+        })
+        .catch(error => {
+            console.error('Error fetching daily weather data:', error);
+            alert('Error fetching daily weather data. Please try again.');
     });
 }
 
@@ -25,15 +38,18 @@ function getWeather() {
 function displayWeather(data) {
     const weatherIcon = document.getElementById('weather-icon');
     const tempDivInfo = document.getElementById('temperature-div');
-    const weatherDescription = document.getElementById('weather-description');
+    const weatherDescriptionDiv = document.getElementById('weather-description');
+    const dailyForecastDiv = document.getElementById('daily-forecast');
+
 
     // Clear previous weather data
-    weatherDescription.innerHTML = '';
+    weatherDescriptionDiv.innerHTML = '';
     tempDivInfo.innerHTML = '';
+    dailyForecastDiv.innerHTML = '';
     weatherIcon.style.display = 'none';
 
     if (data.cod === '404') {
-        weatherDescription.innerHTML = `<p>${data.message}</p>`;
+        weatherDescriptionDiv.innerHTML = `<p>${data.message}</p>`;
     } else {
 
         const cityName = data.location.name;
@@ -45,13 +61,14 @@ function displayWeather(data) {
         const weatherHTML = `<p>${description}</p><p>${cityName}</p>`;
 
         tempDivInfo.innerHTML = temperatureHTML;
-        weatherDescription.innerHTML = weatherHTML;
+        weatherDescriptionDiv.innerHTML = weatherHTML;
         weatherIcon.src = iconUrl;
         weatherIcon.alt = description;
 
         showImage();
     }
 }
+
 
 function showImage() {
     const weatherIcon = document.getElementById('weather-icon');
