@@ -7,11 +7,10 @@ function getWeather() {
         return;
     }
 
-    const currentWeatherUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city
-}&aqi=no`;
-const dailyWeatherUrl = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city
-}&aqi=yes&alerts=yes`;
-    
+    const currentWeatherUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+    const dailyWeatherUrl = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=5&aqi=yes&alerts=yes
+`;
+
 
     fetch(currentWeatherUrl)
         .then(response => response.json())
@@ -21,17 +20,17 @@ const dailyWeatherUrl = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey
         .catch(error => {
             console.error('Error fetching current weather data:', error);
             alert('Error fetching current weather data. Please try again.');
-    });
+        });
 
     fetch(dailyWeatherUrl)
         .then((response) => response.json())
         .then((data) => {
-            displayDailyWeather(data.list);
+            displayDailyWeather(data.forecast.forecastday);
         })
         .catch(error => {
             console.error('Error fetching daily weather data:', error);
             alert('Error fetching daily weather data. Please try again.');
-    });
+        });
 }
 
 // Display weather function
@@ -69,6 +68,35 @@ function displayWeather(data) {
     }
 }
 
+// Display daily weather function
+function displayDailyWeather(data) {
+    const dailyForecastDiv = document.getElementById('daily-forecast');
+
+    dailyForecastDiv.innerHTML = '';
+
+
+    data.forEach(day => {
+        const date = new Date(day.date);
+        const dayOfWeek = date.toLocaleString('en-us', {
+            weekday: 'long'
+        });
+        const maxTemp = day.day.maxtemp_c;
+        const minTemp = day.day.mintemp_c;
+        const description = day.day.condition.text;
+        const iconUrl = day.day.condition.icon;
+
+        const dailyForecastHTML = `
+            <div class="daily-item">
+                <span>${dayOfWeek}</span>
+                <img src="${iconUrl}" alt="${description}">
+                <span>Max: ${maxTemp}°C</span>
+                <span>Min: ${minTemp}°C</span>
+            </div>
+        `;
+
+        dailyForecastDiv.innerHTML += dailyForecastHTML;
+    });
+}
 
 function showImage() {
     const weatherIcon = document.getElementById('weather-icon');
