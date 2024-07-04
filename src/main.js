@@ -56,9 +56,8 @@ function displayWeather(data) {
         const description = data.current.condition.text;
         const iconUrl = data.current.condition.icon;
 
-        const temperatureHTML = `<p>${temperature}°C</p>`;
-        const weatherHTML = `<p>${description}</p><p>${cityName}</p>`;
-
+        const temperatureHTML = `<span>${temperature}°C</span>`;
+        const weatherHTML = `<span>${description}</span><span>${cityName}</span>`;
         tempDivInfo.innerHTML = temperatureHTML;
         weatherDescriptionDiv.innerHTML = weatherHTML;
         weatherIcon.src = iconUrl;
