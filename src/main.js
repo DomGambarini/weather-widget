@@ -101,3 +101,13 @@ function showImage() {
     const weatherIcon = document.getElementById('weather-icon');
     weatherIcon.style.display = 'block';
 }
+
+// Reset weather function
+function reset() {
+    document.getElementById('city').value = '';
+    document.getElementById('weather-description').innerHTML = '';
+    document.getElementById('temperature-div').innerHTML = '';
+    document.getElementById('daily-forecast').innerHTML = '';
+    const weatherIcon = document.getElementById('weather-icon');
+    weatherIcon.style.display = 'none';
+}
